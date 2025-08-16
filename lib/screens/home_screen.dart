@@ -5,8 +5,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../models/lat_lng.dart';
+import '../widgets/app_bottom_nav.dart';
 import 'next_screen.dart';
-import 'postcard_screen.dart';
+import 'postcard/postcard_screen.dart';
 import 'search_screen.dart';
 import 'settings_screen.dart';
 import 'sns_screen.dart';
@@ -162,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // 오른쪽 하단 FAB들
           Positioned(
-            bottom: 100,
+            bottom: 50,
             right: 20,
             child: Column(
               children: [
@@ -170,28 +171,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   heroTag: 'centerBtn',
                   onPressed: _centerMap,
                   child: const Icon(Icons.my_location),
+                  elevation: 0,
                 ),
                 const SizedBox(height: 10),
                 FloatingActionButton(
                   heroTag: 'nextBtn',
                   onPressed: () => Navigator.pushNamed(context, NextScreen.routeName),
                   child: const Icon(Icons.arrow_forward),
+                  elevation: 0,
                 )
               ],
             ),
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        onTap: _onBottomNavTap,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
-          BottomNavigationBarItem(icon: Icon(Icons.photo), label: 'Postcard'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'SNS Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-        ],
-      ),
+      bottomNavigationBar: const AppBottomNavBar(currentIndex: 0),
     );
   }
 }
